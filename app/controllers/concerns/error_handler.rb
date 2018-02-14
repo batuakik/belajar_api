@@ -9,9 +9,23 @@ module ErrorHandler
         rescue_from ErrorHandler::AuthenticateError, with: :unauthorized
         rescue_from ErrorHandler::InvalidToken, with: :unauthorized
         rescue_from ErrorHandler::MissingToken, with: :unauthorized
+        rescue_from ActionController::ParameterMissing, with: :bad_request
     end
 
     private
+        def bad_request(error)
+            error = {
+                errors: {
+                    title: "Bad Request",
+                    description: error.message,
+                    params: params,
+                    status: 400
+                }
+            }
+
+            render_json(error, :bad_request)
+        end
+
         def unauthorized(error)
             error = {
                 errors: {

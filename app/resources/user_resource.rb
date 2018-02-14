@@ -1,5 +1,5 @@
 class UserResource < JSONAPI::Resource
-    attributes :username, :password
+    attributes :firstname, :lastname, :address, :username, :password
 
     def fetchable_fields
         super - [:password]

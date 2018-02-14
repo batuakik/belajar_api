@@ -1,0 +1,6 @@
+Music Player
+
+Spesification
+- User can register
+- User must login to play all song in application
+- User can add songs to their own playlist
